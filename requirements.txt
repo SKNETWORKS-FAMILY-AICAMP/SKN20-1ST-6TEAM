@@ -1,4 +1,9 @@
-streamlit>=1.38.0
-mysql-connector-python>=9.0.0
-python-dotenv>=1.0.1
-selenium>=4.24.0
+python-dotenv
+streamlit
+mysql-connector-python
+selenium
+pymysql
+numpy
+pandas
+matplotlib
+scikit-learn
