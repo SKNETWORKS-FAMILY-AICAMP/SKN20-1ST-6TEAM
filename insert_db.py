@@ -35,8 +35,7 @@ CREATE TABLE IF NOT EXISTS ev_registration (
     id INT AUTO_INCREMENT PRIMARY KEY,
     year VARCHAR(50) NOT NULL,
     region VARCHAR(50) NOT NULL,
-    count INT NOT NULL,
-    UNIQUE KEY unique_year_region (year, region)
+    count INT NOT NULL
 );
 """) # 중복 방지를 위한 UNIQUE 제약조건 추가
 
@@ -72,7 +71,6 @@ for _, row in df.iterrows():
             sql = """
             INSERT INTO ev_registration (year, region, count)
             VALUES (%s, %s, %s)
-            ON DUPLICATE KEY UPDATE count = VALUES(count)
             """
             cursor.execute(sql, (year, region, count))
         except Exception as e:
