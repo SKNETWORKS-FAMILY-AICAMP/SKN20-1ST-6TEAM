@@ -34,3 +34,5 @@ for row in rows:
 
 # 크롬 드라이버 종료
 driver.quit()
+
+# 가상환경 키고 pip install selenium webdriver-manager beautifulsoup4 lxml 이후에 사용
