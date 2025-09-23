@@ -48,18 +48,16 @@ def year_list():
         return result
 
 # EV_REGISTRATION 테이블 지역별 전기차 현황 조회
-def elec_year_region(year):
+def elec_year_region(sel_year):
+    print(f"year {sel_year}")
     with get_connection() as conn:
-        sql = '''
-                SELECT 
-                      YEAR, REGION, COUNT  
-                  FROM EV_REGISTRATION WHERE YEAR ={year}
-              '''   
-        region = []  # x축 담을 리스트
-        count = []  # y축 담을 리스트
+        sql = "SELECT YEAR, REGION, COUNT FROM EV_REGISTRATION WHERE YEAR =%s"  
+        region = [] # 지역
+        count  = []  # 등록대수
         with conn.cursor() as cur:
-            cur.execute(sql)
+            cur.execute(sql, sel_year)
             for c in cur.fetchall():            
-                region.append(c[0])
-                count.append(int(c[2]))
+                region.append(c[1])
+                count.append(c[2])
         return region,count
+    pass
