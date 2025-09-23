@@ -10,7 +10,7 @@ conn = pymysql.connect(
     db="6team", charset="utf8mb4"
 )
 
-# SQL 실행 (테이블에 region, count 컬럼 있다고 가정)
+# SQL 실행
 df = pd.read_sql("SELECT region, count FROM ev_charger_status", conn)
 conn.close()
 
