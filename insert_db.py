@@ -25,8 +25,8 @@ conn = pymysql.connect(
 cursor = conn.cursor()
 
 # DB 생성 및 선택
-cursor.execute(f"DROP DATABASE IF EXISTS {DB_NAME};")
-cursor.execute(f"CREATE DATABASE {DB_NAME} DEFAULT CHARACTER SET utf8mb4 DEFAULT COLLATE utf8mb4_general_ci;")
+# cursor.execute(f"DROP DATABASE IF EXISTS {DB_NAME};")
+# cursor.execute(f"CREATE DATABASE {DB_NAME} DEFAULT CHARACTER SET utf8mb4 DEFAULT COLLATE utf8mb4_general_ci;")
 cursor.execute(f"USE {DB_NAME};")
 
 # 테이블 생성
@@ -67,17 +67,19 @@ for _, row in df.iterrows():
         continue 
     
     for region in regions:
-        count = clean_count(row[region])
-        sql = """
-                INSERT INTO ev_registration (year, region, count)
-                    VALUES (%s, %s, %s)
-                ON DUPLICATE KEY UPDATE count = VALUES(count); 
+        try:
+            count = clean_count(row[region])
+            sql = """
+            INSERT INTO ev_registration (year, region, count)
+            VALUES (%s, %s, %s)
+            ON DUPLICATE KEY UPDATE count = VALUES(count)
             """
-        # 중복 시 count 업데이트
-cursor.execute(sql, (year, region, count))
+            cursor.execute(sql, (year, region, count))
+        except Exception as e:
+            continue
 
 conn.commit()
+print("모든 변경사항 저장 완료")
 cursor.close()
 conn.close()
-
-print("데이터 삽입 완료")
+print("데이터베이스 연결 종료")
