@@ -76,7 +76,7 @@ region_counts.columns = ["지역", "충전소 갯수"]
 cursor.execute("""
                CREATE TABLE IF NOT EXISTS ev_charger_status(
                region varchar(50),
-               count int
+               cnt int
                );
                """)
 
@@ -87,7 +87,7 @@ conn.commit()
 # 새로운 데이터 삽입
 region_counts  # 데이터 확인용 출력
 insert_query = """
-    INSERT INTO ev_charger_status (region, count)
+    INSERT INTO ev_charger_status (region, cnt)
     VALUES (%s, %s)
 """
 
@@ -99,6 +99,6 @@ conn.commit()
 
 
 # 삽입된 데이터 확인
-cursor.execute("SELECT * FROM ev_charger_status ORDER BY count DESC")
+cursor.execute("SELECT * FROM ev_charger_status ORDER BY cnt DESC")
 inserted_data = cursor.fetchall()
 df_inserted = pd.DataFrame(inserted_data, columns=["지역", "충전소 갯수"])
