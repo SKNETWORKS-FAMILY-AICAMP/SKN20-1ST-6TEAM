@@ -84,7 +84,7 @@
 -vehicle_status : 연료별 차량 등록현황
 -faq : 브랜드별 FAQ
 
-
+![설명](HEXA_ERD.jpg)
 
 
 ##📊 서비스 화면
