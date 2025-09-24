@@ -9,7 +9,7 @@
 
 | | | | |
 |---|---|---|---|
-| <img src="https://avatars.githubusercontent.com/u/181325754?v=4" width="120"> <br> [김태빈](https://github.com/binibini90) | <img src="https://avatars.githubusercontent.com/u/178726488?v=4" width="120"> <br> [김황현](https://github.com/python11021) | <img src="https://avatars.githubusercontent.com/u/174814422?v=4" width="120"> <br> [나호성](https://github.com/BBuSang) | <img src="https://avatars.githubusercontent.com/u/174813325?v=4" width="120"> <br> [이지은](https://github.com/jieun9508-cyber) |
+| <img src="pika.jpeg" width="120"> <br> [김태빈](https://github.com/binibini90) | <img src="jaman.jpeg" width="140"> <br> [김황현](https://github.com/python11021) | <img src="pichu.jpeg" width="120"> <br> [나호성](https://github.com/BBuSang) | <img src="ulpak.jpg" width="120"> <br> [이지은](https://github.com/jieun9508-cyber) |
 
 
 ---
@@ -102,3 +102,6 @@ pip install -r requirements.txt
 
 # 실행
 streamlit run app.py
+
+# mac실행
+python -m streamlit run ev_dashboard.py
