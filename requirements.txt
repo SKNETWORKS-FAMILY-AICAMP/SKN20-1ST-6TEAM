@@ -1,9 +1,11 @@
-python-dotenv
-streamlit
 mysql-connector-python
-selenium
-pymysql
+altair
+python-dotenv
+matplotlib
 numpy
 pandas
-matplotlib
-scikit-learn
+plotly
+pymysql
+requests
+selenium
+streamlit
