@@ -31,7 +31,7 @@ set_font()
 
 # 페이지 설정
 st.set_page_config(
-    page_title="전기차 종합 대시보드",
+    page_title="EV Dashboard",
     page_icon="⚡",
     layout="centered",
     initial_sidebar_state="expanded",
@@ -72,8 +72,7 @@ def show_home():
 
     col1, col2, col3 = st.columns([1,3,1])
     with col2:
-        st.image("https://cdn-icons-png.flaticon.com/512/4378/4378534.png", width=100)
-        st.title("⚡ 전기차 종합 대시보드")
+        st.header("⚡ 전기차 종합 대시보드")
         st.caption("전기차의 현재와 미래를 한눈에 살펴보세요")
 
     col1, col2, col3 = st.columns(3)
@@ -84,6 +83,27 @@ def show_home():
     with col3:
         st.metric(label="충전소 총 수", value=f"{int(charger_total):,}개")
     st.divider()
+
+    # 2행 3열 그리드로 출처/링크 버튼 배치
+    grid = [
+        ("출처 : 한국전력공사", "데이터 출처 바로가기", "https://www.data.go.kr/data/15039545/fileData.do", "🔗"),
+        ("출처 : 차지 인포(전기차 등록 현황)", "차지 인포 바로가기", "https://chargeinfo.ksga.org/front/statistics/evCar", "🔗"),
+        ("출처 : 국토교통부", "국토교통부 바로가기", "https://www.molit.go.kr/USR/NEWS/m_71/dtl.jsp?id=95091094&lcmspage=2&utm_source=chatgpt.com", "🔗"),
+        ("출처 : 기아 (전기차 FAQ)", "기아 FAQ 바로가기", "https://www.kia.com/kr/vehicles/kia-ev/guide/faq", "🔗"),
+        ("출처 : 현대자동차 (전기차 FAQ)", "현대자동차 FAQ 바로가기", "https://www.hyundai.com/kr/ko/e/service-membership/ev/hi-ev", "🔗"),
+        ("출처 : SK Networks (대시보드)", "SKN 홈페이지", "https://www.sknetworks.co.kr/", "🌐" ),
+    ]
+    row1 = st.columns(3)
+    row2 = st.columns(3)
+    for i in range(3):
+        with row1[i]:
+            st.write(grid[i][0])
+            st.link_button(grid[i][1], grid[i][2], icon=grid[i][3])
+    for i in range(3, 6):
+        with row2[i-3]:
+            st.write(grid[i][0])
+            st.link_button(grid[i][1], grid[i][2], icon=grid[i][3])
+
 
 # .env 로드 & 환경변수
 load_dotenv()
@@ -280,7 +300,6 @@ def electric_ratio_chart():
 # ─────────────────────────────────────────────────────────
 # 메인 UI
 # ─────────────────────────────────────────────────────────
-st.title("⚡ 전기차 종합 대시보드")
 
 # 사이드바 - 메뉴 선택
 with st.sidebar:
@@ -372,10 +391,10 @@ def regional_ev_chart():
     
     # 지도 데이터 준비
     df = pd.DataFrame({
-        'regions': regions,
+        '지역': regions,
         'lats': lats,
         'lons': lons,
-        'pop': map_data[1]
+        '등록대수': map_data[1]
     })
     
     # 지도 생성
@@ -383,10 +402,11 @@ def regional_ev_chart():
         df,
         lat="lats",
         lon="lons",
-        hover_name="regions",
-        hover_data={'pop': True, 'lats': False, 'lons': False},
-        size="pop",
-        color="regions",
+        hover_name="지역",
+        hover_data={'등록대수': True, 'lats': False, 'lons': False},
+        size="등록대수",
+        size_max=50,
+        color="지역",
         zoom=6,
         height=800,
         mapbox_style="open-street-map"
