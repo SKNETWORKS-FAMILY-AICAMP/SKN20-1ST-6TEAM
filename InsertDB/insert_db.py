@@ -12,7 +12,7 @@ DB_PASSWORD = os.getenv("DB_PASSWORD")
 DB_NAME = "6team" 
 
 # CSV 불러오기
-df = pd.read_csv("C:/Users/31799/Desktop/SKN20-1ST-6TEAM/crawling/ev_car_stats_full_with_header.csv")
+df = pd.read_csv("crawling/ev_car_stats_full_with_header.csv")
 
 # MySQL 연결
 conn = pymysql.connect(
