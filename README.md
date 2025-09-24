@@ -102,3 +102,6 @@ pip install -r requirements.txt
 
 # 실행
 streamlit run app.py
+
+# mac실행
+python -m streamlit run ev_dashboard.py
