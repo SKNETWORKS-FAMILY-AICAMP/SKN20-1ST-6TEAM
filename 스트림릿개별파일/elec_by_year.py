@@ -4,7 +4,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import elecdb   # 6team 디비 
+import InsertDB.elecdb as elecdb   # 6team 디비 
 
 # EV_REGISTRATION 테이블 연도별 전기차 현황 데이타 datas에 저장
 datas =elecdb.elec_yearstatus_list()    

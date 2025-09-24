@@ -4,7 +4,7 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-import elecdb
+import InsertDB.elecdb as elecdb
 
 
 st.title("지역별 전기차 보급 현황")

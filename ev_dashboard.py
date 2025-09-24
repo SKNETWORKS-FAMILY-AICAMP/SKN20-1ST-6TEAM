@@ -8,16 +8,17 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
 import plotly.express as px
+import altair as alt
 from dotenv import load_dotenv
-import elecdb  # 전기차 데이터베이스 모듈
+import InsertDB.elecdb as elecdb  # 전기차 데이터베이스 모듈
 
 # ─────────────────────────────────────────────────────────
 # 기본 설정
 # ─────────────────────────────────────────────────────────
 # 폰트 설정
-font_path = "C:/Windows/Fonts/malgun.ttf"
-font_prop = fm.FontProperties(fname=font_path)
-plt.rcParams['font.family'] = font_prop.get_name()
+# font_path = "C:/Windows/Fonts/malgun.ttf"
+# font_prop = fm.FontProperties(fname=font_path)
+# plt.rcParams['font.family'] = font_prop.get_name()
 
 # 페이지 설정
 st.set_page_config(
@@ -52,6 +53,36 @@ def get_conn():
     except Error:
         return get_conn_cached(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME)
     return conn
+
+# ─────────────────────────────────────────────────────────
+# 충전소 현황 관련 함수
+# ─────────────────────────────────────────────────────────
+def charger_status_chart():
+    # DB 연결해서 데이터 가져오기
+    conn = get_conn()
+    df = pd.read_sql("SELECT region, count FROM ev_charger_status", conn)
+    
+    st.header("전기차 충전소 지역별 현황")
+    
+    # Altair 막대그래프
+    chart = (
+        alt.Chart(df)
+        .mark_bar()
+        .encode(
+            x=alt.X("region:N", title="지역", sort="-y"),   # x축: 지역, 개수순 정렬
+            y=alt.Y("count:Q", title="수량"),
+            color=alt.Color("region:N", legend=None),       # 색상 자동 구분
+            tooltip=["region", "count"]                     # 마우스오버 툴팁
+        )
+        .properties(width=600, height=400)
+    )
+
+    st.altair_chart(chart, use_container_width=True)
+
+    st.markdown(
+        "<div style='text-align:right; font-size:12px; color:gray;'>출처: 한국전력공사 (2025.6.30) </div>",
+        unsafe_allow_html=True
+    )
 
 # ─────────────────────────────────────────────────────────
 # FAQ 관련 쿼리 함수
@@ -198,7 +229,7 @@ with st.sidebar:
     st.title("메뉴 선택")
     main_menu = st.radio(
         "보고 싶은 정보를 선택하세요:",
-        ["연도별 전기차 현황", "지역별 전기차 현황", "연료별 차량 수", "전기차 비율", "브랜드별 FAQ"]
+        ["연도별 전기차 현황", "지역별 전기차 현황", "연료별 차량 수", "전기차 비율", "충전소 현황", "브랜드별 FAQ"]
     )
 
 # ─────────────────────────────────────────────────────────
@@ -299,6 +330,8 @@ elif main_menu == "연료별 차량 수":
 elif main_menu == "전기차 비율":
     st.header("전기차 비율 분석")
     electric_ratio_chart()
+elif main_menu == "충전소 현황":
+    charger_status_chart()
 else:  # FAQ 섹션
     try:
         brands = fetch_brands()

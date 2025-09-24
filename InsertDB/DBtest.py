@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS vehicle_stats (
 """)
 
 # CSV 읽기
-df = pd.read_csv("차량_연료_통계.csv", encoding='cp949')  # 한글 파일명 및 인코딩 설정
+df = pd.read_csv("C:/Users/31799/Desktop/SKN20-1ST-6TEAM/crawling/차량_연료_통계.csv", encoding='cp949')  # 한글 파일명 및 인코딩 설정
 
 # wide 형태 -> long 형태 변환 (연도별, 연료별, 차량 수)
 df_long = df.melt(id_vars=["연도"], var_name="fuel_type", value_name="count")
