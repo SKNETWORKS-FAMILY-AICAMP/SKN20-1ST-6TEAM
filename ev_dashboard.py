@@ -33,8 +33,57 @@ set_font()
 st.set_page_config(
     page_title="전기차 종합 대시보드",
     page_icon="⚡",
-    layout="wide"
+    layout="wide",
+    initial_sidebar_state="expanded",
+    menu_items={
+        'About': '© 2025 전기차 종합 대시보드 - SK Networks',
+        'Get help': 'mailto:support@example.com',
+        'Report a bug': "mailto:bug@example.com"
+    }
 )
+
+# 헤더/메트릭을 함수로 분리
+
+def show_home():
+    # DB에서 최신 연도와 직전 연도 데이터 조회
+    conn = get_conn()
+    # 전기차 등록대수
+    reg_df = pd.read_sql("SELECT year, SUM(count) as total FROM ev_registration GROUP BY year ORDER BY year DESC LIMIT 2", conn)
+    if len(reg_df) == 2:
+        latest_year = reg_df.iloc[0]['year']
+        latest_total = reg_df.iloc[0]['total']
+        prev_total = reg_df.iloc[1]['total']
+        reg_delta = latest_total - prev_total
+        reg_rate = (reg_delta / prev_total * 100) if prev_total else 0
+    else:
+        latest_year = "-"
+        latest_total = 0
+        reg_delta = 0
+        reg_rate = 0
+    # 충전소 수
+    charger_df = pd.read_sql("SELECT region, SUM(count) as total FROM ev_charger_status GROUP BY region", conn)
+    charger_total = charger_df['total'].sum()
+    # 충전소 전년 대비 증가율 (예시: ev_charger_status에 연도 정보가 없으면 계산 불가)
+    # 실제 연도별 데이터가 있으면 아래처럼 쿼리
+    # charger_year_df = pd.read_sql("SELECT year, SUM(count) as total FROM ev_charger_status GROUP BY year ORDER BY year DESC LIMIT 2", conn)
+    # ... 증가율 계산 ...
+    charger_rate = "-"  # 연도별 데이터 없으면 표시 불가
+    conn.close()
+
+    col1, col2, col3 = st.columns([1,3,1])
+    with col2:
+        st.image("https://cdn-icons-png.flaticon.com/512/4378/4378534.png", width=100)
+        st.title("⚡ 전기차 종합 대시보드")
+        st.caption("전기차의 현재와 미래를 한눈에 살펴보세요")
+
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.metric(label=f"전년 대비 증가율 ({latest_year})", value=f"{reg_rate:.1f}%", delta=f"{reg_delta:,}대")
+    with col2:
+        st.metric(label="전기차 총 등록대수", value=f"{int(latest_total):,}대", delta=f"{int(reg_delta):,}대")
+    with col3:
+        st.metric(label="충전소 총 수", value=f"{int(charger_total):,}개")
+    st.divider()
 
 # .env 로드 & 환경변수
 load_dotenv()
@@ -236,10 +285,27 @@ st.title("⚡ 전기차 종합 대시보드")
 # 사이드바 - 메뉴 선택
 with st.sidebar:
     st.title("메뉴 선택")
+    
+    st.markdown("---")
+    # 메뉴 선택
     main_menu = st.radio(
         "보고 싶은 정보를 선택하세요:",
-        ["연도별 전기차 현황", "지역별 전기차 현황", "연료별 차량 수", "전기차 비율", "충전소 현황", "브랜드별 FAQ"]
+        ["홈", "연도별 전기차 현황", "지역별 전기차 현황", "연료별 차량 수", 
+         "전기차 비율", "충전소 현황", "브랜드별 FAQ"]
     )
+    
+    # 프로필 카드
+    st.markdown("---")
+    st.subheader("📊 대시보드 정보")
+    st.info("""
+    - 최근 업데이트: 2025.09.24
+    - 데이터 출처: 한국전력공사
+    - API 버전: v1.0.0
+    """)
+
+    # 하단 정보
+    st.markdown("---")
+    st.caption("© 2025 SK Networks. All rights reserved.")
 
 # ─────────────────────────────────────────────────────────
 # 연도별/지역별 전기차 현황 관련 함수
@@ -329,7 +395,9 @@ def regional_ev_chart():
     st.plotly_chart(fig)
 
 # 메인 컨텐츠
-if main_menu == "연도별 전기차 현황":
+if main_menu == "홈":
+    show_home()
+elif main_menu == "연도별 전기차 현황":
     yearly_ev_chart()
 elif main_menu == "지역별 전기차 현황":
     regional_ev_chart()
