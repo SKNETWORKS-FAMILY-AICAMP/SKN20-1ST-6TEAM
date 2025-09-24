@@ -16,9 +16,18 @@ import InsertDB.elecdb as elecdb  # 전기차 데이터베이스 모듈
 # 기본 설정
 # ─────────────────────────────────────────────────────────
 # 폰트 설정
-# font_path = "C:/Windows/Fonts/malgun.ttf"
-# font_prop = fm.FontProperties(fname=font_path)
-# plt.rcParams['font.family'] = font_prop.get_name()
+import platform
+
+def set_font():
+    if platform.system() == 'Darwin':  # macOS
+        plt.rcParams['font.family'] = 'AppleGothic'
+    elif platform.system() == 'Windows':
+        plt.rcParams['font.family'] = 'Malgun Gothic'
+    
+    # 그래프에서 마이너스 기호가 깨지는 것을 방지
+    plt.rcParams['axes.unicode_minus'] = False
+
+set_font()
 
 # 페이지 설정
 st.set_page_config(
