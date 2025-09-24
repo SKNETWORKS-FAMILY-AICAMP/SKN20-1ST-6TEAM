@@ -9,7 +9,7 @@
 
 | | | | |
 |---|---|---|---|
-| <img src="사진폴더/pika.jpeg" width="120"> <br> [김태빈](https://github.com/binibini90) | <img src="jaman.jpeg" width="140"> <br> [김황현](https://github.com/python11021) | <img src="pichu.jpeg" width="120"> <br> [나호성](https://github.com/BBuSang) | <img src="ulpak.jpg" width="120"> <br> [이지은](https://github.com/jieun9508-cyber) |
+| <img src="사진폴더/pika.jpeg" width="120"> <br> [김태빈](https://github.com/binibini90) | <img src="사진폴더/jaman.jpeg" width="140"> <br> [김황현](https://github.com/python11021) | <img src="사진폴더/pichu.jpeg" width="120"> <br> [나호성](https://github.com/BBuSang) | <img src="사진폴더/ulpak.jpg" width="120"> <br> [이지은](https://github.com/jieun9508-cyber) |
 
 
 ---
@@ -84,7 +84,7 @@
 - vehicle_status : 연료별 차량 등록현황
 - faq : 브랜드별 FAQ
 
-![설명](HEXA_ERD.jpg)
+![설명](사진폴더/HEXA_ERD.jpg)
 
 ## 7.프로젝트 실행 결과
 ## 7.1. 짜라락
