@@ -33,7 +33,7 @@ set_font()
 st.set_page_config(
     page_title="전기차 종합 대시보드",
     page_icon="⚡",
-    layout="wide",
+    layout="centered",
     initial_sidebar_state="expanded",
     menu_items={
         'About': '© 2025 전기차 종합 대시보드 - SK Networks',
