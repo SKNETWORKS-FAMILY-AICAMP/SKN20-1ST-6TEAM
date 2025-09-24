@@ -79,10 +79,10 @@
 ## 6. ERD (Entity-Relationship Diagram)
 
 ### 테이블 구조
--ev_registration : 전기 자동차 등록현황
--ev_charger_status : 전기 자동차 충전소 현황
--vehicle_status : 연료별 차량 등록현황
--faq : 브랜드별 FAQ
+- ev_registration : 전기 자동차 등록현황
+- ev_charger_status : 전기 자동차 충전소 현황
+- vehicle_status : 연료별 차량 등록현황
+- faq : 브랜드별 FAQ
 
 ![설명](HEXA_ERD.jpg)
 
