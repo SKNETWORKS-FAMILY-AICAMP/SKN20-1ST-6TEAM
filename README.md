@@ -2,6 +2,7 @@
 
 ## 📖 프로젝트 소개
 EV(전기차) 이용자가 늘어나는 추이를 확인하고 ~~~~~~~~
+
 저희 팀은 전기차의 등록현황과 전기차 등록 비율, 충전소 현황, **브랜드별 FAQ를 크롤링하여 데이터베이스에 저장하고, Streamlit 기반 웹 서비스에서 한눈에 조회할 수 있는 플랫폼**을 만들었습니다.  
 
 👉 누구나 쉽게 EV 관련 FAQ를 검색하고 문제 해결에 도움을 받을 수 있습니다.
@@ -10,10 +11,10 @@ EV(전기차) 이용자가 늘어나는 추이를 확인하고 ~~~~~~~~
 
 ## 🧑‍🤝‍🧑 팀원 소개
 
-- <img src="https://avatars.githubusercontent.com/u/181325754?v=4" width="80"> [김태빈](https://github.com/binibini90)  
-- <img src="https://avatars.githubusercontent.com/u/178726488?v=4" width="80"> [김황현](https://github.com/python11021)  
-- <img src="https://avatars.githubusercontent.com/u/174814422?v=4" width="80"> [나호성](https://github.com/BBuSang)  
-- <img src="https://avatars.githubusercontent.com/u/174813325?v=4" width="80"> [이지은](https://github.com/jieun9508-cyber)  
+| | | | |
+|---|---|---|---|
+| <img src="https://avatars.githubusercontent.com/u/181325754?v=4" width="120"> <br> [김태빈](https://github.com/binibini90) | <img src="https://avatars.githubusercontent.com/u/178726488?v=4" width="120"> <br> [김황현](https://github.com/python11021) | <img src="https://avatars.githubusercontent.com/u/174814422?v=4" width="120"> <br> [나호성](https://github.com/BBuSang) | <img src="https://avatars.githubusercontent.com/u/174813325?v=4" width="120"> <br> [이지은](https://github.com/jieun9508-cyber) |
+
 
 
 
