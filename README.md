@@ -42,7 +42,11 @@
 ### 3.2. 백엔드  
 - ![Python](https://img.shields.io/badge/-python-blue?logo=python&logoColor=white) : 데이터 처리 및 비즈니스 로직 구현  
 - ![MySQL](https://img.shields.io/badge/-mysql-blue?logo=mysql&logoColor=white) : 데이터베이스 관리 및 저장  
-- ![Pandas](https://img.shields.io/badge/-pandas-purple?logo=pandas&logoColor=white) : 데이터 분석 및 필터링 처리  
+- ![Pandas](https://img.shields.io/badge/-pandas-purple?logo=pandas&logoColor=white) : 데이터 분석 및 필터링 처리
+
+### 3.3 아키택처
+![설명](사진폴더/아키택처.png)
+
 
 ---
 
